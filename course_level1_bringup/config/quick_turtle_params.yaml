@@ -1,0 +1,13 @@
+/pid_turtle:
+  ros__parameters:
+    D_angle: 1.0
+    D_d: 0.05
+    I_angle: 0.001
+    I_d: 0.05
+    P_angle: 20.0
+    P_d: 15.0
+    dt: 0.05
+
+/turtle_spawn:
+  ros__parameters:
+    spawn_period: 0.1

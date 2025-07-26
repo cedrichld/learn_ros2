@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="course_level1_py" exec="number_publisher" name="my_nb_pub" namespace="abc">
+        <!-- Removing the slash before number allows for the topic name (after ns) to
+         be renamed, and keeping the namespace before -->
+        <remap from="number" to="my_number" />
+        <!-- <param name="number" value="6" />
+        <param name="timer_period" value="0.5" /> 
+        IF we want to use a single param. if not YAML --> 
+        <param from="$(find-pkg-share course_level1_bringup)/config/number_app.yaml" />
+    </node>
+    <node pkg="course_level1_cpp" exec="number_counter" name="my_nb_count" namespace="abc">
+        <remap from="number" to="my_number" />
+    </node>
+</launch>

@@ -1,0 +1,4 @@
+/my_nb_pub:
+  ros__parameters:
+    number: 6
+    timer_period: 0.5
