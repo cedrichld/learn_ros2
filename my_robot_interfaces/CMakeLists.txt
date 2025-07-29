@@ -15,6 +15,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/PowerLed.srv"
   "msg/BatteryPercentage.msg"
   "msg/TurtleSpawnInfo.msg"
+  "msg/Target.msg"
+  "msg/TargetArray.msg"
+  "srv/KillTurtle.srv"
 )
 
 ament_export_dependencies(rosidl_default_runtime)

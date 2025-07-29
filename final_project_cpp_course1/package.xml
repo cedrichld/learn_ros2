@@ -1,19 +1,18 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>course_level1_bringup</name>
+  <name>final_project_cpp_course1</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="ros2@todo.todo">ros2</maintainer>
+  <maintainer email="cedrich@seas.upenn.edu">cedric</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>course_level1_py</exec_depend>
-  <exec_depend>course_level1_cpp</exec_depend>
-  <exec_depend>final_project_py_course1</exec_depend>
-  <exec_depend>final_project_cpp_course1</exec_depend>
-  <exec_depend>turtlesim</exec_depend>
+  <depend>rclcpp</depend>
+  <depend>turtlesim</depend>
+  <depend>geometry_msgs</depend>
+  <depend>my_robot_interfaces</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

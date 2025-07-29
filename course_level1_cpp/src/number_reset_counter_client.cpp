@@ -20,7 +20,8 @@ public:
         auto request = std::make_shared<example_interfaces::srv::SetBool::Request>();
         request->data = data;
 
-        client_->async_send_request(request, std::bind(&ResetCounterClientNode::callbackCallResetCounter, this, _1));
+        client_->async_send_request(request, 
+            std::bind(&ResetCounterClientNode::callbackCallResetCounter, this, _1));
     }
 private:
     void callbackCallResetCounter(rclcpp::Client<example_interfaces::srv::SetBool>::SharedFuture future)
