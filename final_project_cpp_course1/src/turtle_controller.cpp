@@ -92,8 +92,8 @@ private:
             const double angle = TurtleControllerNode::wrap_angle(
                 std::atan2(target->y - pose->y, target->x - pose->x) - pose->theta);
 
-            cmd_vel.linear.x = 20.0 * dist;
-            cmd_vel.angular.z = 80.0 * angle;
+            cmd_vel.linear.x = 8.0 * dist;
+            cmd_vel.angular.z = 45.0 * angle;
             
             cmd_pub_->publish(cmd_vel);
 

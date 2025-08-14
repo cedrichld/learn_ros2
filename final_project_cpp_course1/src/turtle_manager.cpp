@@ -1,5 +1,4 @@
 #include "rclcpp/rclcpp.hpp"
-#include "rclcpp/rclcpp.hpp"
 #include "my_robot_interfaces/msg/target_array.hpp"
 #include "my_robot_interfaces/msg/target.hpp"
 #include "my_robot_interfaces/srv/kill_turtle.hpp"
@@ -16,7 +15,7 @@ using namespace std::placeholders;
 class TurtleManagerNode : public rclcpp::Node
 {
 public:
-    TurtleManagerNode() : Node("turtle_manager"), spawn_period(0.1), rng_(std::random_device{}())
+    TurtleManagerNode() : Node("turtle_manager"), spawn_period(0.3), rng_(std::random_device{}())
     {
         targets_ = this->create_publisher<my_robot_interfaces::msg::TargetArray>("/targets", 1);
         kill_turtle_ = this->create_service<my_robot_interfaces::srv::KillTurtle>(
