@@ -1,0 +1,11 @@
+# Goal
+float64 cmd_lin_x
+float64 cmd_ang_z
+float64 duration
+---
+# Result
+string message
+float64[2] position # x, y
+---
+# Feedback
+float64 percent_completion

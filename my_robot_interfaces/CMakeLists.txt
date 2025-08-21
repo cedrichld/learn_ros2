@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/HardwareStatus.msg"
   "srv/ComputeRectangleArea.srv"
@@ -18,6 +19,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Target.msg"
   "msg/TargetArray.msg"
   "srv/KillTurtle.srv"
+  "action/CountUntil.action"
+  "action/MoveRobot.action"
+  "action/MoveTurtle.action"
 )
 
 ament_export_dependencies(rosidl_default_runtime)
