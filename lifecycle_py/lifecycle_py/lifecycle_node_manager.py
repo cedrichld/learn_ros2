@@ -30,7 +30,7 @@ class LifecycleNodeManager(Node):
         self.get_logger().info("Configuring OK, now inactive")
 
         # sleep for this example
-        time.sleep(1.5)
+        time.sleep(2)
 
         # Inactive to Active
         self.get_logger().info("Trying to switch to activating")

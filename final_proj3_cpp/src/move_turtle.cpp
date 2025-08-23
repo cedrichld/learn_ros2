@@ -2,16 +2,19 @@
 
 namespace final_proj3_cpp {
 
-MoveTurtleServerNode::MoveTurtleServerNode(const rclcpp::NodeOptions &options) : Node("move_turtle_server_node", options)
+MoveTurtleServer::MoveTurtleServer(const rclcpp::NodeOptions &options) : Node("move_turtle_server_node", options)
 {
+    this->declare_parameter("turtle_name", "controlled_turtle");
+    turtle_name_ = this->get_parameter("turtle_name").as_string();
+
     // Double check we want reentrant
     cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
     move_turtle_server_ = rclcpp_action::create_server<MoveTurtle>(
         this,
         "move_turtle", 
-        std::bind(&MoveTurtleServerNode::goal_callback, this, _1, _2),
-        std::bind(&MoveTurtleServerNode::cancel_callback, this, _1),
-        std::bind(&MoveTurtleServerNode::handle_accepted_callback, this, _1),
+        std::bind(&MoveTurtleServer::goal_callback, this, _1, _2),
+        std::bind(&MoveTurtleServer::cancel_callback, this, _1),
+        std::bind(&MoveTurtleServer::handle_accepted_callback, this, _1),
         rcl_action_server_get_default_options(),
         cb_group_
     );
@@ -23,13 +26,13 @@ MoveTurtleServerNode::MoveTurtleServerNode(const rclcpp::NodeOptions &options) :
     pub_options_.callback_group = cb_group_;
 
     turtle_pose_sub_ = this->create_subscription<turtlesim::msg::Pose>(
-        "controlled_turtle/pose", 10, std::bind(&MoveTurtleServerNode::callback_turtlepose, this, _1), sub_options_);
+        "/" + turtle_name_ + "/pose", 10, std::bind(&MoveTurtleServer::callback_turtlepose, this, _1), sub_options_);
     turtle_cmd_pub_ = this->create_publisher<geometry_msgs::msg::Twist>(
-        "controlled_turtle/cmd_vel", 10, pub_options_);
+        "/" + turtle_name_ + "/cmd_vel", 10, pub_options_);
 
     // turtle_spawn_kill_state_client_ = this->create_client<lifecycle_msgs::srv::GetState>("/turtle_spawn_kill_client/get_state");
     lifecycle_state_sub_ = this->create_subscription<example_interfaces::msg::Bool>(
-        "lifecycle_state", 1, std::bind(&MoveTurtleServerNode::callback_lifecycle_state, this, _1), sub_options_);
+        "lifecycle_state", 1, std::bind(&MoveTurtleServer::callback_lifecycle_state, this, _1), sub_options_);
     activated_ = false;
     RCLCPP_INFO(this->get_logger(), "Move Turtle ActionServer started.");
 }
@@ -42,17 +45,17 @@ MoveTurtleServerNode::MoveTurtleServerNode(const rclcpp::NodeOptions &options) :
 
 //     auto request = std::make_shared<lifecycle_msgs::srv::GetState::Request>();
 
-//     turtle_spawn_kill_state_client_->async_send_request(request, std::bind(&MoveTurtleServerNode::callbackcallTurtleSpawnKillStateClient, this, _1));
+//     turtle_spawn_kill_state_client_->async_send_request(request, std::bind(&MoveTurtleServer::callbackcallTurtleSpawnKillStateClient, this, _1));
 // }
 
-rclcpp_action::GoalResponse MoveTurtleServerNode::goal_callback(
+rclcpp_action::GoalResponse MoveTurtleServer::goal_callback(
     const rclcpp_action::GoalUUID &uuid, std::shared_ptr<const MoveTurtle::Goal> goal)
 {
     (void)uuid;
     RCLCPP_INFO(this->get_logger(), "Received a goal.");
-    
-    bool stop_options = (!activated_) || ((goal->cmd_lin_x < 0.0 || goal->cmd_lin_x > 5.0) ||  
-            (goal->cmd_ang_z < -5.0 || goal->cmd_ang_z > 5.0) || (goal->duration <= 0.0));
+
+    bool stop_options = (!activated_) || ((fabs(goal->cmd_lin_x) > 3.0) ||  
+            (fabs(goal->cmd_ang_z) > 3.0) || (goal->duration <= 0.0));
     // If goal is not within requested format
     if (stop_options) {
         RCLCPP_INFO(this->get_logger(), "Rejecting the goal - node deactivated or goal parameters out of range.");
@@ -75,7 +78,7 @@ rclcpp_action::GoalResponse MoveTurtleServerNode::goal_callback(
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
 }
 
-rclcpp_action::CancelResponse MoveTurtleServerNode::cancel_callback(
+rclcpp_action::CancelResponse MoveTurtleServer::cancel_callback(
     const std::shared_ptr<MoveTurtleGoalHandle> goal_handle)
 {
     RCLCPP_INFO(this->get_logger(), "Received Cancel Request.");
@@ -83,14 +86,14 @@ rclcpp_action::CancelResponse MoveTurtleServerNode::cancel_callback(
     return rclcpp_action::CancelResponse::ACCEPT;
 }
 
-void MoveTurtleServerNode::handle_accepted_callback(
+void MoveTurtleServer::handle_accepted_callback(
     const std::shared_ptr<MoveTurtleGoalHandle> goal_handle)
 {
     RCLCPP_INFO(this->get_logger(), "Executing the goal.");
     execute_goal(goal_handle);
 }
 
-void MoveTurtleServerNode::execute_goal(const std::shared_ptr<MoveTurtleGoalHandle> goal_handle)
+void MoveTurtleServer::execute_goal(const std::shared_ptr<MoveTurtleGoalHandle> goal_handle)
 {
     {
         // Not to run both mutex simultaneously
@@ -101,7 +104,7 @@ void MoveTurtleServerNode::execute_goal(const std::shared_ptr<MoveTurtleGoalHand
     // Get request from goal
     double cmd_lin_x = goal_handle->get_goal()->cmd_lin_x;
     double cmd_ang_z = goal_handle->get_goal()->cmd_ang_z;
-    double duration  = goal_handle->get_goal()->duration;
+    auto duration  = rclcpp::Duration::from_seconds(goal_handle->get_goal()->duration);
 
     geometry_msgs::msg::Twist turtle_cmd_vel;
     turtle_cmd_vel.linear.x = cmd_lin_x;
@@ -111,18 +114,18 @@ void MoveTurtleServerNode::execute_goal(const std::shared_ptr<MoveTurtleGoalHand
     auto result = std::make_shared<MoveTurtle::Result>();
     auto feedback = std::make_shared<MoveTurtle::Feedback>();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    
-    const double ctrl_hz = 20.0;
-    rclcpp::WallRate loop_rate(ctrl_hz);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));  
+    const auto start = now();
+    rclcpp::Rate rate(10);
 
-    const auto t0 = std::chrono::steady_clock::now();
-
-    while (true) {
-        const double curr_t =
-            std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
-
-        if (curr_t >= duration) break;
+    while (rclcpp::ok()) {
+        if (now() - start >= duration) {
+            turtle_cmd_pub_->publish(geometry_msgs::msg::Twist()); // Stop the turtle
+            result->position = {turtle_pose_.x, turtle_pose_.y};
+            result->message = "Goal Succeeded";
+            goal_handle->succeed(result);
+            return;
+        }
         
         if (!activated_) {
             result->position = {turtle_pose_.x, turtle_pose_.y};
@@ -150,24 +153,19 @@ void MoveTurtleServerNode::execute_goal(const std::shared_ptr<MoveTurtleGoalHand
         
         turtle_cmd_pub_->publish(turtle_cmd_vel);
 
-        feedback->percent_completion = (curr_t / duration) * 100.0;
+        feedback->percent_completion = ((now().seconds() - start.seconds()) / duration.seconds()) * 100.0;
         goal_handle->publish_feedback(feedback);
 
-        loop_rate.sleep();
-    }
-
-    turtle_cmd_pub_->publish(geometry_msgs::msg::Twist()); // Stop the turtle
-    result->position = {turtle_pose_.x, turtle_pose_.y};
-    result->message = "Goal Succeeded";
-    goal_handle->succeed(result);
+        rate.sleep();
+    }   
 }
 
-void MoveTurtleServerNode::callback_turtlepose(const turtlesim::msg::Pose pose) 
+void MoveTurtleServer::callback_turtlepose(const turtlesim::msg::Pose pose) 
 {
     turtle_pose_ = pose;
 }
 
-void MoveTurtleServerNode::callback_lifecycle_state(const example_interfaces::msg::Bool state)
+void MoveTurtleServer::callback_lifecycle_state(const example_interfaces::msg::Bool state)
 {
     activated_ = state.data;
 }
@@ -184,12 +182,13 @@ void MoveTurtleServerNode::callback_lifecycle_state(const example_interfaces::ms
 } // namespace final_proj3_cpp
 
 #include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(final_proj3_cpp::MoveTurtleServerNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(final_proj3_cpp::MoveTurtleServer)
+
 
 // int main(int argc, char **argv)
 // {
 //     rclcpp::init(argc, argv);
-//     auto node = std::make_shared<MoveTurtleServerNode>();
+//     auto node = std::make_shared<MoveTurtleServer>();
 //     rclcpp::executors::MultiThreadedExecutor executor;
 //     executor.add_node(node);
 //     executor.spin();

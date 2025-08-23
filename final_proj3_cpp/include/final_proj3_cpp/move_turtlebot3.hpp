@@ -15,10 +15,10 @@ using namespace std::placeholders;
 
 namespace final_proj3_cpp {
 
-class MoveTurtlebot3ServerNode : public rclcpp::Node
+class MoveTurtlebot3Server : public rclcpp::Node
 {
 public:
-    MoveTurtlebot3ServerNode(const rclcpp::NodeOptions &options);
+    MoveTurtlebot3Server(const rclcpp::NodeOptions &options);
 
 private:
 

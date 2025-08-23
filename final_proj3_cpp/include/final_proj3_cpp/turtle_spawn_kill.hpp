@@ -13,10 +13,10 @@ using LifecycleCallbackReturn =
 
 namespace final_proj3_cpp {
 
-class TurtleSpawnKillClientNode : public rclcpp_lifecycle::LifecycleNode
+class TurtleSpawnKillClient : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-    TurtleSpawnKillClientNode(const rclcpp::NodeOptions &options);
+    TurtleSpawnKillClient(const rclcpp::NodeOptions &options);
 
     void callTurtleSpawn(const double x, const double y, const double theta, const std::string name);
     void callTurtleKill(const std::string name);
@@ -31,6 +31,7 @@ public:
 private:
     void callbackCallTurtleSpawn(rclcpp::Client<turtlesim::srv::Spawn>::SharedFuture future);
 
+    std::string turtle_name_;
     rclcpp::Client<turtlesim::srv::Spawn>::SharedPtr spawn_client_;
     rclcpp::Client<turtlesim::srv::Kill>::SharedPtr kill_client_;
     rclcpp::Client<std_srvs::srv::Empty>::SharedPtr clear_bg_client_;

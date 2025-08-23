@@ -2,16 +2,16 @@
 
 namespace final_proj3_cpp {
 
-MoveTurtlebot3ServerNode::MoveTurtlebot3ServerNode(const rclcpp::NodeOptions &options) : Node("move_turtlebot3_server_node", options)
+MoveTurtlebot3Server::MoveTurtlebot3Server(const rclcpp::NodeOptions &options) : Node("move_turtlebot3_server_node", options)
 {
     // Double check we want reentrant
     cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
     move_turtlebot3_server_ = rclcpp_action::create_server<MoveTurtlebot3>(
         this,
         "move_turtlebot3", 
-        std::bind(&MoveTurtlebot3ServerNode::goal_callback, this, _1, _2),
-        std::bind(&MoveTurtlebot3ServerNode::cancel_callback, this, _1),
-        std::bind(&MoveTurtlebot3ServerNode::handle_accepted_callback, this, _1),
+        std::bind(&MoveTurtlebot3Server::goal_callback, this, _1, _2),
+        std::bind(&MoveTurtlebot3Server::cancel_callback, this, _1),
+        std::bind(&MoveTurtlebot3Server::handle_accepted_callback, this, _1),
         rcl_action_server_get_default_options(),
         cb_group_
     );
@@ -23,24 +23,24 @@ MoveTurtlebot3ServerNode::MoveTurtlebot3ServerNode(const rclcpp::NodeOptions &op
     pub_options_.callback_group = cb_group_;
 
     turtlebot3_pose_sub_ = this->create_subscription<nav_msgs::msg::Odometry>( 
-        "/odom", 10, std::bind(&MoveTurtlebot3ServerNode::callback_turtlebot3pose, this, _1), sub_options_);
+        "/odom", 10, std::bind(&MoveTurtlebot3Server::callback_turtlebot3pose, this, _1), sub_options_);
     turtlebot3_cmd_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>(
         "/cmd_vel", 10, pub_options_);
 
     lifecycle_state_sub_ = this->create_subscription<example_interfaces::msg::Bool>(
-        "lifecycle_state", 1, std::bind(&MoveTurtlebot3ServerNode::callback_lifecycle_state, this, _1), sub_options_);
+        "lifecycle_state", 1, std::bind(&MoveTurtlebot3Server::callback_lifecycle_state, this, _1), sub_options_);
     activated_ = false;
     RCLCPP_INFO(this->get_logger(), "Move Turtlebot3 ActionServer started.");
 }
 
-rclcpp_action::GoalResponse MoveTurtlebot3ServerNode::goal_callback(
+rclcpp_action::GoalResponse MoveTurtlebot3Server::goal_callback(
     const rclcpp_action::GoalUUID &uuid, std::shared_ptr<const MoveTurtlebot3::Goal> goal)
 {
     (void)uuid;
     RCLCPP_INFO(this->get_logger(), "Received a goal.");
     
-    bool stop_options = (!activated_) || ((goal->cmd_lin_x < 0.0 || goal->cmd_lin_x > 5.0) ||  
-            (goal->cmd_ang_z < -5.0 || goal->cmd_ang_z > 5.0) || (goal->duration <= 0.0));
+    bool stop_options = (!activated_) || ((fabs(goal->cmd_lin_x) > 3.0) ||  
+            (fabs(goal->cmd_ang_z) > 3.0) || (goal->duration <= 0.0));
     // If goal is not within requested format
     if (stop_options) {
         RCLCPP_INFO(this->get_logger(), "Rejecting the goal - node deactivated or goal parameters out of range.");
@@ -63,7 +63,7 @@ rclcpp_action::GoalResponse MoveTurtlebot3ServerNode::goal_callback(
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
 }
 
-rclcpp_action::CancelResponse MoveTurtlebot3ServerNode::cancel_callback(
+rclcpp_action::CancelResponse MoveTurtlebot3Server::cancel_callback(
     const std::shared_ptr<MoveTurtlebot3GoalHandle> goal_handle)
 {
     RCLCPP_INFO(this->get_logger(), "Received Cancel Request.");
@@ -71,14 +71,14 @@ rclcpp_action::CancelResponse MoveTurtlebot3ServerNode::cancel_callback(
     return rclcpp_action::CancelResponse::ACCEPT;
 }
 
-void MoveTurtlebot3ServerNode::handle_accepted_callback(
+void MoveTurtlebot3Server::handle_accepted_callback(
     const std::shared_ptr<MoveTurtlebot3GoalHandle> goal_handle)
 {
     RCLCPP_INFO(this->get_logger(), "Executing the goal.");
     execute_goal(goal_handle);
 }
 
-void MoveTurtlebot3ServerNode::execute_goal(const std::shared_ptr<MoveTurtlebot3GoalHandle> goal_handle)
+void MoveTurtlebot3Server::execute_goal(const std::shared_ptr<MoveTurtlebot3GoalHandle> goal_handle)
 {
     {
         // Not to run both mutex simultaneously
@@ -100,13 +100,10 @@ void MoveTurtlebot3ServerNode::execute_goal(const std::shared_ptr<MoveTurtlebot3
     auto feedback = std::make_shared<MoveTurtlebot3::Feedback>();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    
-    const double ctrl_hz = 20.0;
-    rclcpp::WallRate loop_rate(ctrl_hz);
-
+    rclcpp::WallRate loop_rate(20.0);
     const auto t0 = std::chrono::steady_clock::now();
 
-    while (true) {
+    while (rclcpp::ok()) {
         const double curr_t =
             std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
 
@@ -150,16 +147,17 @@ void MoveTurtlebot3ServerNode::execute_goal(const std::shared_ptr<MoveTurtlebot3
     goal_handle->succeed(result);
 }
 
-void MoveTurtlebot3ServerNode::callback_turtlebot3pose(const nav_msgs::msg::Odometry pose) 
+void MoveTurtlebot3Server::callback_turtlebot3pose(const nav_msgs::msg::Odometry pose) 
 {
     turtlebot3_pose_ = pose;
 }
 
-void MoveTurtlebot3ServerNode::callback_lifecycle_state(const example_interfaces::msg::Bool state)
+void MoveTurtlebot3Server::callback_lifecycle_state(const example_interfaces::msg::Bool state)
 {
     activated_ = state.data;
 }
+
 } // namespace final_proj3_cpp
 
 #include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(final_proj3_cpp::MoveTurtlebot3ServerNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(final_proj3_cpp::MoveTurtlebot3Server)

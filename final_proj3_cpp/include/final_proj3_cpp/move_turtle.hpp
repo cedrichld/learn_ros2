@@ -16,10 +16,10 @@ using namespace std::placeholders;
 
 namespace final_proj3_cpp {
 
-class MoveTurtleServerNode : public rclcpp::Node
+class MoveTurtleServer : public rclcpp::Node
 {
 public:
-    MoveTurtleServerNode(const rclcpp::NodeOptions &options);
+    MoveTurtleServer(const rclcpp::NodeOptions &options);
 
     // void callTurtleSpawnKillStateClient()
     // {
@@ -29,7 +29,7 @@ public:
 
     //     auto request = std::make_shared<lifecycle_msgs::srv::GetState::Request>();
 
-    //     turtle_spawn_kill_state_client_->async_send_request(request, std::bind(&MoveTurtleServerNode::callbackcallTurtleSpawnKillStateClient, this, _1));
+    //     turtle_spawn_kill_state_client_->async_send_request(request, std::bind(&MoveTurtleServer::callbackcallTurtleSpawnKillStateClient, this, _1));
     // }
 
 private:
@@ -59,6 +59,7 @@ private:
     rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr turtle_pose_sub_;
     turtlesim::msg::Pose turtle_pose_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr turtle_cmd_pub_;
+    std::string turtle_name_;
 
     // rclcpp::Client<lifecycle_msgs::srv::GetState>::SharedPtr turtle_spawn_kill_state_client_;
     rclcpp::Subscription<example_interfaces::msg::Bool>::SharedPtr lifecycle_state_sub_;
