@@ -1,0 +1,10 @@
+<launch>
+    <node pkg="final_project_py_course1" exec="find_target"/>
+    <node pkg="final_project_py_course1" exec="pid_turtle">
+        <param from="$(find-pkg-share course_level1_bringup)/config/quick_turtle_params.yaml" />
+    </node>
+    <node pkg="final_project_py_course1" exec="turtle_spawn">
+        <param from="$(find-pkg-share course_level1_bringup)/config/quick_turtle_params.yaml" />
+    </node>
+    <node pkg="turtlesim" exec="turtlesim_node"/>
+</launch>

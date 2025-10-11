@@ -6,12 +6,12 @@
     <xacro:include filename="mobile_base.xacro" />
     <xacro:include filename="mobile_base_gazebo.xacro" />
     <xacro:include filename="camera.xacro" />
-    <xacro:include filename="standalone_arm.urdf.xacro" />
+    <!-- <xacro:include filename="standalone_arm.urdf.xacro" />
 
     <joint name="mobile_base_arm_base_joint" type="fixed">
         <parent link="base_link" />
         <child link="arm_base_link" />
         <origin xyz="${base_length / 4.0} 0 ${base_height}" rpy="0 0 0"/>
-    </joint>
+    </joint> -->
 
 </robot>

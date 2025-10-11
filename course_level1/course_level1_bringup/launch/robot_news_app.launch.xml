@@ -1,0 +1,30 @@
+<launch>
+    <node pkg="course_level1_py" exec="robot_news_station" name="station_jander">
+        <remap from="robot_news" to="da_news" />
+        <param from="$(find-pkg-share course_level1_bringup)/config/station_app.yaml"/>
+    </node>
+    
+    <node pkg="course_level1_py" exec="robot_news_station" name="station_c3po">
+        <remap from="robot_news" to="da_news" />
+        <param from="$(find-pkg-share course_level1_bringup)/config/station_app.yaml"/>
+    </node>
+    
+    <node pkg="course_level1_py" exec="robot_news_station" name="station_giskard">
+        <remap from="robot_news" to="da_news" />
+        <param from="$(find-pkg-share course_level1_bringup)/config/station_app.yaml"/>
+    </node>
+
+    <node pkg="course_level1_py" exec="robot_news_station" name="station_bb8">
+        <remap from="robot_news" to="da_news" />
+        <param from="$(find-pkg-share course_level1_bringup)/config/station_app.yaml"/>
+    </node>
+
+    <node pkg="course_level1_py" exec="robot_news_station" name="station_daneel">
+        <remap from="robot_news" to="da_news" />
+        <param from="$(find-pkg-share course_level1_bringup)/config/station_app.yaml"/>
+    </node>
+
+    <node pkg="course_level1_py" exec="smartphone">
+        <remap from="robot_news" to="da_news" />
+    </node>
+</launch>

@@ -1,0 +1,19 @@
+/station_jander:
+  ros__parameters:
+    robot_name: jander
+
+/station_c3po:
+  ros__parameters:
+    robot_name: c3po
+
+/station_giskard:
+  ros__parameters:
+    robot_name: giskard
+
+/station_bb8:
+  ros__parameters:
+    robot_name: bb8
+
+/station_daneel:
+  ros__parameters:
+    robot_name: daneel

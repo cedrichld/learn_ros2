@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.10">
+  <model name="sluice">
+    <static>true</static>
+
+    <link name="hLight">
+        <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.0 0.0 0.0 1</specular>
+        <intensity>1.5</intensity>
+        <attenuation>
+            <range>1000</range>
+            <constant>0.9</constant>
+            <linear>0.01</linear>
+            <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.5 0.1 -0.9</direction>
+        </light>
+    </link>
+
+    <link name="heightmap">
+      <collision name="heightmap_collision">
+        <geometry>
+          <heightmap>
+            <uri>heightmaps/rubicon_heightmap.png</uri>
+            <size>37.5 37.5 5</size>
+            <pos>0 0 0</pos>
+          </heightmap>
+        </geometry>
+      </collision>
+      <visual name="heightmap_visual">
+        <geometry>
+          <heightmap>
+            <use_terrain_paging>true</use_terrain_paging>
+            <texture>
+              <diffuse>textures/TerrainRocky_Albedo.png</diffuse>
+              <normal>textures/TerrainRocky_Normal.png</normal>
+              <size>10</size>
+            </texture>
+            <uri>heightmaps/rubicon_heightmap.png</uri>
+            <size>37.5 37.5 5</size>
+            <pos>0 0 0</pos>
+          </heightmap>
+          
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

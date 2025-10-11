@@ -1,4 +1,0 @@
-<launch>
-    <!-- Including another file such as python launch file -->
-    <include file="$(find-pkg-share course_level1_bringup)/launch/number_app.launch.py" />
-</launch>

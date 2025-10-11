@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="final_project_cpp_course1" exec="turtle_manager" />
+    <node pkg="final_project_cpp_course1" exec="turtle_controller" />
+    <node pkg="turtlesim" exec="turtlesim_node" />
+</launch>
