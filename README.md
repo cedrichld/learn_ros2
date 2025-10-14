@@ -125,7 +125,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Behavior Trees:** swapping **planner/controller** plugins without code changes.
 * **Costmaps:** global/local, inflation, footprint tuning, voxel/obstacle layers.
 
-**Final demo:** **Map my apartment** in Gazebo, then navigate between waypoints with obstacle inflation set for safe clearances.
+**Final demo:** **Map a house** in Gazebo, then navigate to a goal set by the user.
 
 <p align="center">
   <img src="docs/Nav2/Nav2_house.gif" width="49%" />
