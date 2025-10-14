@@ -29,7 +29,7 @@ MoveTurtlebot3Server::MoveTurtlebot3Server(const rclcpp::NodeOptions &options) :
 
     lifecycle_state_sub_ = this->create_subscription<example_interfaces::msg::Bool>(
         "lifecycle_state", 1, std::bind(&MoveTurtlebot3Server::callback_lifecycle_state, this, _1), sub_options_);
-    activated_ = false;
+    activated_ = true; // Theoretically should be a server request from turtlesim or a proper lifecycle node..
     RCLCPP_INFO(this->get_logger(), "Move Turtlebot3 ActionServer started.");
 }
 

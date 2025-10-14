@@ -7,20 +7,20 @@
         final_proj3_cpp::TurtleSpawnKillClientNode" output="screen" />
     <executable cmd="ros2 component load /move_turtle_container final_proj3_cpp 
         final_proj3_cpp::MoveTurtleServerNode" output="screen" /> -->
-    <executable cmd="ros2 component load /move_turtle_container final_proj3_cpp 
-        final_proj3_cpp::MoveTurtlebot3ServerNode" output="screen" />
-
     <!-- <executable cmd="ros2 component load /move_turtle_container final_proj3_cpp 
-        final_proj3_cpp::TurtleController" output="screen" /> -->
+        final_proj3_cpp::MoveTurtlebot3Server" output="screen" /> -->
 
-    <!-- <node pkg="turtlesim" exec="turtlesim_node" /> -->
+    <executable cmd="ros2 component load /move_turtle_container final_proj3_cpp 
+        final_proj3_cpp::TurtleController" output="screen" />
+
+    <node pkg="turtlesim" exec="turtlesim_node" />
 
     <node pkg="lifecycle_py" exec="lifecycle_node_manager">
         <param name="managed_node_name" value="turtle_controller" />
     </node>
 
-    <set_env name="TURTLEBOT3_MODEL" value="waffle"/>
-    <include file="$(find-pkg-share turtlebot3_gazebo)/launch/turtlebot3_world.launch.py" />
+    <!-- <set_env name="TURTLEBOT3_MODEL" value="waffle"/>
+    <include file="$(find-pkg-share turtlebot3_gazebo)/launch/turtlebot3_world.launch.py" /> -->
     <!-- <node pkg="final_proj3_cpp" exec="turtle_spawn_kill" />
     <node pkg="final_proj3_cpp" exec="move_turtle" /> -->
 </launch>
