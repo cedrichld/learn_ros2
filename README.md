@@ -101,9 +101,13 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Mini demos:**
 
 <p align="center">
-  <img src="docs/MoveIt/moveit_interface_demo.gif" width="32%" />
-  <img src="docs/MoveIt/moveit_API_call.gif" width="32%" />
-  <img src="docs/MoveIt/moveit_API_call_cartesian.gif" width="32%" />
+  <img src="docs/MoveIt/moveit_interface_demo.gif" width="60%" />
+</p>
+<p align="center">
+  <img src="docs/MoveIt/moveit_API_call.gif" width="60%" />
+</p>
+<p align="center">
+  <img src="docs/MoveIt/moveit_API_call_cartesian.gif" width="60%" />
 </p>
 
 **Final activity:** build a small **arm commander** that sequences joint targets and a short **Cartesian segment**, with collision‑aware planning and graceful stop on preemption.
@@ -144,9 +148,9 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Final project:** compose a multi‑node app with **lifecycle‑managed** sensing and a **C++ action server** coordinating a task; verify reconfiguration without process restarts.
 
 <p align="center">
-  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-17 11-06-30.png" width="32%" />
+  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-17 11-06-30.png" width="29%" />
   <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-17 11-08-04.png" width="32%" />
-  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-15 15-02-57.png" width="32%" />
+  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-15 15-02-57.png" width="35%" />
 </p>
 
 ---
@@ -204,11 +208,4 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ---
 
-## Notes
-
-* All demos are kept **small and readable**. The idea is to show **working concepts quickly**.
-* If you want deeper dives (parameters, configs, or code walkthroughs), see each course folder’s README or source files.
-
----
-
-<p align="center"><i>Maintained by Cedric Hollande — built to be read in minutes, and proven in GIFs.</i></p>
+<p align="center"><i>Maintained by Cedric Hollande.</i></p>
