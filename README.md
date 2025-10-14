@@ -167,7 +167,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Final project:** complete robot description and **simulate sensors**; verify TF tree and visualize in RViz.
 
 <p align="center">
-  <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="60%" />
+  <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="70%" />
 </p>
 
 ---
