@@ -1,4 +1,4 @@
-# learn_ros2 — Robotics Portfolio
+# learn_ros2
 
 <p align="center">
   <img alt="ROS 2" src="https://img.shields.io/badge/ROS%202-Jazzy%20Llamas-22314E?logo=ros&logoColor=white" />
@@ -11,7 +11,7 @@
 
 ## Overview
 
-This repo is my hands‑on journey through **ROS 2 simulation and control**, from fundamentals to full navigation and motion planning. It contains clean, minimal examples in **C++ and Python**, plus small, visual **final projects** to show the concepts in action. The goal is simple: **demonstrate practical robotics skills quickly, with visuals**.
+This repo is my hands‑on journey through **ROS 2 simulation and control**, from fundamentals to full navigation and motion planning. It contains clean, minimal examples in **C++ and Python**, plus small, visual **final projects** to show the concepts in action.
 
 **Repo structure (top‑level):**
 
@@ -41,7 +41,7 @@ docs/             # GIFs, videos, screenshots, certificates
   <img src="docs/Nav2/Nav2_house.gif" width="48.5%" />
 </p>
 
----
+<!-- ---
 
 ## Quick Start
 
@@ -72,7 +72,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
   map:=src/nav2_turtlebot3_learning/maps/my_map.yaml
 ```
 
-> **Note:** Some demos assume you have the TurtleBot3, Gazebo, and MoveIt dependencies installed and your `GAZEBO_MODEL_PATH`/TB3 env vars set.
+> **Note:** Some demos assume you have the TurtleBot3, Gazebo, and MoveIt dependencies installed and your `GAZEBO_MODEL_PATH`/TB3 env vars set. -->
 
 ---
 
@@ -83,7 +83,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Skills:** hardware_interface, controller_manager, joint state/effort/velocity interfaces, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, PID tuning.
 * **Outcome:** bring a custom URDF robot to life with **trajectory controllers** (follow_joint_trajectory) and **position/velocity controllers** in simulation.
 
-> Folder: `course_ros2_control/` (Scaffold in place; implementation next.)
+> Folder: `course_ros2_control/` (Implementation next.)
 
 ---
 
@@ -148,9 +148,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Final project:** compose a multi‑node app with **lifecycle‑managed** sensing and a **C++ action server** coordinating a task; verify reconfiguration without process restarts.
 
 <p align="center">
-  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-17 11-06-30.png" width="29%" />
-  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-17 11-08-04.png" width="32%" />
-  <img src="docs/Beginners - lvl 3/Screenshot from 2025-08-15 15-02-57.png" width="35%" />
+  <img src="docs/Nav2/ros2_lvl3_final_project" width="99%" />
 </p>
 
 ---
