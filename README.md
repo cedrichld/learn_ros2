@@ -144,7 +144,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Components:** composition, intra‑process comms, lower latency & memory.
 * **Executors:** single vs multi‑threaded, callback groups, real‑time behavior.
 
-**Final project:** compose a multi‑node app with **lifecycle‑managed** sensing and a **C++ action server** coordinating a task; verify reconfiguration without process restarts.
+**Final project:** compose a multi‑node C++ app with **lifecycle‑managed** robot bringup and an **action server** coordinating a short and simple goal.
 
 <p align="center">
   <img src="docs/Beginners - lvl 3/ros2_lvl3_final_project.gif" width="99%" />
@@ -163,7 +163,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **RViz:** visual debugging with TF, markers, point clouds.
 * **Gazebo:** spawn, sensors, plugins; launch files for **bringup**.
 
-**Final project:** complete robot description and **simulate sensors**; verify TF tree and visualize in RViz.
+**Final project:** complete robot description **simulate sensors**, and control a robot in Gazebo; verify TF tree and visualize in RViz.
 
 <p align="center">
   <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="70%" />
@@ -179,13 +179,13 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 * **Nodes, topics, services, parameters, timers** in C++ & Python.
 * **Messages & interfaces:** custom `.msg/.srv` with `rosidl`.
-* **Packages & launch:** `ament_cmake` and `ament_python` basics.
+* **Packages & launch:** `ament_cmake` and `ament_python` pkg basics.
 
 **Mini finals:**
 
 <p align="center">
-  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="49%" />
-  <img src="docs/Beginners - lvl 1/turtle_cpp.gif" width="49%" />
+  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="44%" />
+  <img src="docs/Beginners - lvl 1/turtle_cpp.gif" width="44%" />
 </p>
 
 ---
@@ -193,7 +193,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 ## Tech Stack & Skills
 
 * **ROS 2 Jazzy**, **C++17/20**, **Python 3.12**
-* **MoveIt**, **Nav2**, **Gazebo (Ignition)**, **RViz**
+* **MoveIt**, **Nav2**, **Gazebo (Harmonic)**, **RViz**
 * **URDF/Xacro**, **TF2**, **ros2_control** (in progress)
 * **Actions, Lifecycle, Components, Executors**
 
@@ -205,4 +205,4 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ---
 
-<p align="center"><i>Maintained by Cedric Hollande.</i></p>
+<p align="center"><i>Maintained by Cedric Hollande - cedric.hollande25@gmail.com</i></p>
