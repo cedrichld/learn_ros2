@@ -125,11 +125,10 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Behavior Trees:** swapping **planner/controller** plugins without code changes.
 * **Costmaps:** global/local, inflation, footprint tuning, voxel/obstacle layers.
 
-**Final demo:** **Map a house** in Gazebo, then navigate to a goal set by the user.
+**Final demo:** **Map a house** with SLAM in Rviz + Gazebo, then navigate to a goal set by the user.
 
 <p align="center">
-  <img src="docs/Nav2/Nav2_house.gif" width="49%" />
-  <img src="docs/Nav2/Nav2_mapping_house.png" width="49%" />
+  <img src="docs/Nav2/Nav2_house.gif" width="70%" />
 </p>
 
 ---
