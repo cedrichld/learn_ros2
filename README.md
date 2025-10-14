@@ -4,20 +4,20 @@
   <img alt="ROS 2" src="https://img.shields.io/badge/ROS%202-Jazzy%20Llamas-22314E?logo=ros&logoColor=white" />
   <img alt="C++" src="https://img.shields.io/badge/C++-17/20-00599C?logo=c%2b%2b&logoColor=white" />
   <img alt="Python" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" />
-  <img alt="Gazebo" src="https://img.shields.io/badge/Gazebo-Ignition-FF6F00?logo=gazebo&logoColor=white" />
+  <img alt="Gazebo" src="https://img.shields.io/badge/Gazebo-Harmonic-FF6F00?logo=gazebo&logoColor=white" />
   <img alt="Nav2" src="https://img.shields.io/badge/Navigation2-Behavior%20Trees-2C3E50" />
   <img alt="MoveIt" src="https://img.shields.io/badge/MoveIt-Planning%20&%20Control-9B59B6" />
 </p>
 
 ## Overview
 
-This repo is my hands‑on journey through **ROS 2 simulation and control**, from fundamentals to full navigation and motion planning. It contains clean, minimal examples in **C++ and Python**, plus small, visual **final projects** to show the concepts in action.
+This repo is my hands‑on journey through **ROS 2 simulation and control**, from fundamentals to full navigation and motion planning. It contains examples in **C++ and Python**, plus **final projects** to show the concepts in action.
 
 **Repo structure (top‑level):**
 
 ```
 course_level1/    # Core ROS 2 nodes in C++/Python + final projects
-course_level2/    # URDF, TF, RViz, Gazebo; sensor sim + bringup
+course_level2/    # URDF, TF, RViz2, Gazebo; sensor sim + bringup
 course_level3/    # Actions, lifecycle, components, executors + final project
 course_moveit/    # MoveIt planning (URDF->SRDF, planning groups, API demos)
 course_nav2/      # SLAM & Nav2 with TurtleBot3 in Gazebo + mapping & nav
@@ -25,7 +25,7 @@ course_ros2_control/ # (Next up) ROS 2 Control hardware interfaces & controllers
 docs/             # GIFs, videos, screenshots, certificates
 ```
 
-> Courses: by **Edouard Renard** (Level 1, 2, 3, MoveIt, Nav2). Last one left: **ros2_control**.
+> Courses: by **Edouard Renard** (Level 1, 2, 3, MoveIt, Nav2, ros2_control).
 
 ---
 
@@ -81,9 +81,9 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Focus (planned):**
 
 * **Skills:** hardware_interface, controller_manager, joint state/effort/velocity interfaces, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, PID tuning.
-* **Outcome:** bring a custom URDF robot to life with **trajectory controllers** (follow_joint_trajectory) and **position/velocity controllers** in simulation.
+* **Outcome:** bring a custom URDF robot to life with trajectory controllers (follow_joint_trajectory) and position/velocity controllers in simulation.
 
-> Folder: `course_ros2_control/` (Implementation next.)
+> Folder: `course_ros2_control/` (In Progress)
 
 ---
 
@@ -93,12 +93,11 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 **What I learned:**
 
-* **URDF → SRDF pipeline:** joints, collision pairs, and **planning groups**.
-* **Planning scene & kinematics:** IK queries, **Cartesian paths**, constraints.
+* **URDF → SRDF pipeline:** joints, collision pairs, and planning groups.
+* **Planning scene & kinematics:** IK queries, Cartesian paths, constraints.
 * **MoveGroup API (C++/Python):** plan, execute, async stops, trajectory inspection.
-* **Trajectory concepts:** time parameterization, joint limits, smoothing.
 
-**Mini demos:**
+**Demos:**
 
 <p align="center">
   <img src="docs/MoveIt/moveit_interface_demo.gif" width="60%" />
@@ -110,7 +109,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
   <img src="docs/MoveIt/moveit_API_call_cartesian.gif" width="60%" />
 </p>
 
-**Final activity:** build a small **arm commander** that sequences joint targets and a short **Cartesian segment**, with collision‑aware planning and graceful stop on preemption.
+**Final activity:** build a small arm commander that sequences joint targets (either FK or IK) with the option of Cartesian paths.
 
 ---
 
@@ -120,12 +119,11 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 **What I learned:**
 
-* **Mapping & Localization:** `slam_toolbox`, AMCL, static maps.
+* **Mapping & Localization:** `slam_toolbox`, AMCL, static 2D maps.
 * **Nav2 stack:** `bt_navigator`, `planner_server`, `controller_server`, recovery.
-* **Behavior Trees:** swapping **planner/controller** plugins without code changes.
 * **Costmaps:** global/local, inflation, footprint tuning, voxel/obstacle layers.
 
-**Final demo:** **Map a house** with SLAM in Rviz + Gazebo, then navigate to a goal set by the user.
+**Final demo:** Map a house with SLAM in Rviz2 + Gazebo, then navigate to a goal set by the user.
 
 <p align="center">
   <img src="docs/Nav2/Nav2_house.gif" width="70%" />
@@ -135,7 +133,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ## ROS 2 Advanced (Level 3) — Actions, Lifecycle, Components, Executors
 
-**Folders:** `course_level3/*`
+**Folders:** `course_level3/`
 
 **What I learned:**
 
@@ -144,7 +142,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Components:** composition, intra‑process comms, lower latency & memory.
 * **Executors:** single vs multi‑threaded, callback groups, real‑time behavior.
 
-**Final project:** compose a multi‑node C++ app with **lifecycle‑managed** robot bringup and an **action server** coordinating a short and simple goal.
+**Final project:** compose a multi‑node C++ app with lifecycle‑managed robot bringup and an action server coordinating a short and simple goal.
 
 <p align="center">
   <img src="docs/Beginners - lvl 3/ros2_lvl3_final_project.gif" width="99%" />
@@ -152,18 +150,18 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ---
 
-## Level 2 — URDF, TF, RViz, Gazebo
+## Level 2 — URDF, TF, RViz2, Gazebo
 
-**Folders:** `course_level2/*`
+**Folders:** `course_level2/`
 
 **What I learned:**
 
 * **URDF/Xacro:** links/joints, inertia, collision vs visual, macros.
 * **TF tree:** frame conventions, static vs dynamic transforms.
-* **RViz:** visual debugging with TF, markers, point clouds.
-* **Gazebo:** spawn, sensors, plugins; launch files for **bringup**.
+* **RViz2:** visual debugging with TF, markers, point clouds.
+* **Gazebo:** spawn, sensors, plugins; launch files for bringup.
 
-**Final project:** complete robot description **simulate sensors**, and control a robot in Gazebo; verify TF tree and visualize in RViz.
+**Final project:** complete robot description simulate sensors, and control a robot in Gazebo; verify TF tree and visualize in RViz2.
 
 <p align="center">
   <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="70%" />
@@ -173,7 +171,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ## Level 1 — Core ROS 2 (C++ & Python)
 
-**Folders:** `course_level1/*`
+**Folders:** `course_level1/`
 
 **What I learned:**
 
@@ -181,11 +179,11 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Messages & interfaces:** custom `.msg/.srv` with `rosidl`.
 * **Packages & launch:** `ament_cmake` and `ament_python` pkg basics.
 
-**Mini finals:**
+**Final project (Python and C++, respectively):**
 
 <p align="center">
-  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="44%" />
-  <img src="docs/Beginners - lvl 1/turtle_cpp.gif" width="44%" />
+  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="34%" />
+  <img src="docs/Beginners - lvl 1/turtle_cpp.gif" width="34%" />
 </p>
 
 ---
@@ -193,7 +191,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 ## Tech Stack & Skills
 
 * **ROS 2 Jazzy**, **C++17/20**, **Python 3.12**
-* **MoveIt**, **Nav2**, **Gazebo (Harmonic)**, **RViz**
+* **MoveIt**, **Nav2**, **Gazebo (Harmonic)**, **RViz2**
 * **URDF/Xacro**, **TF2**, **ros2_control** (in progress)
 * **Actions, Lifecycle, Components, Executors**
 
