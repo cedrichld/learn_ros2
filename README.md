@@ -148,7 +148,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 **Final project:** compose a multi‑node app with **lifecycle‑managed** sensing and a **C++ action server** coordinating a task; verify reconfiguration without process restarts.
 
 <p align="center">
-  <img src="docs/Nav2/ros2_lvl3_final_project" width="99%" />
+  <img src="docs/Beginners - lvl 3/ros2_lvl3_final_project.gif" width="99%" />
 </p>
 
 ---
