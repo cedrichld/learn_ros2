@@ -32,8 +32,8 @@ docs/             # GIFs, videos, screenshots, certificates
 ## Visual Highlights
 
 <p align="center">
-  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="35%" />
-  <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="64%" />
+  <img src="docs/Beginners - lvl 1/turtle_py.gif" width="34.8%" />
+  <img src="docs/Beginners - lvl 2/lvl2_final_project.gif" width="63.7%" />
 </p>
 
 <p align="center">
