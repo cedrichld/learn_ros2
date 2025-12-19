@@ -1,8 +1,8 @@
 # learn_ros2
 
 <p align="center">
-  <img alt="ROS 2" src="https://img.shields.io/badge/ROS%202-Jazzy%20Llamas-22314E?logo=ros&logoColor=white" />
-  <img alt="C++" src="https://img.shields.io/badge/C++-17/20-00599C?logo=c%2b%2b&logoColor=white" />
+  <img alt="ROS 2" src="https://img.shields.io/badge/ROS%202-Jazzy%20Jalisco-22314E?logo=ros&logoColor=white" />
+  <img alt="C++" src="https://img.shields.io/badge/C++-17-00599C?logo=c%2b%2b&logoColor=white" />
   <img alt="Python" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" />
   <img alt="Gazebo" src="https://img.shields.io/badge/Gazebo-Harmonic-FF6F00?logo=gazebo&logoColor=white" />
   <img alt="Nav2" src="https://img.shields.io/badge/Navigation2-Behavior%20Trees-2C3E50" />
@@ -11,21 +11,21 @@
 
 ## Overview
 
-This repo is my hands‑on journey through **ROS 2 simulation and control**, from fundamentals to full navigation and motion planning. It contains examples in **C++ and Python**, plus **final projects** to show the concepts in action.
+This repo is my hands‑on journey through **ROS 2 simulation and control**, from navigation, motion planning and hardware integration. It contains examples in **C++ and Python**, plus **final projects** to show the concepts in action.
 
 **Repo structure (top‑level):**
 
 ```
-course_level1/    # Core ROS 2 nodes in C++/Python + final projects
-course_level2/    # URDF, TF, RViz2, Gazebo; sensor sim + bringup
-course_level3/    # Actions, lifecycle, components, executors + final project
-course_moveit/    # MoveIt planning (URDF->SRDF, planning groups, API demos)
-course_nav2/      # SLAM & Nav2 with TurtleBot3 in Gazebo + mapping & nav
+course_level1/       # Core ROS 2 nodes in C++/Python + final projects
+course_level2/       # URDF, TF, RViz2, Gazebo; sensor sim + bringup
+course_level3/       # Actions, lifecycle, components, executors + final project
+course_moveit/       # MoveIt planning (URDF->SRDF, planning groups, API demos)
+course_nav2/         # SLAM & Nav2 with TurtleBot3 in Gazebo + mapping & nav
 course_ros2_control/ # (Next up) ROS 2 Control hardware interfaces & controllers
-docs/             # GIFs, videos, screenshots, certificates
+docs/                # GIFs, videos, screenshots, certificates
 ```
 
-> Courses: by **Edouard Renard** (Level 1, 2, 3, MoveIt, Nav2, ros2_control).
+> Courses: by **[Edouard Renard](https://www.udemy.com/user/edouard-renard/)** (Level 1, 2, 3, MoveIt, Nav2, ros2_control).
 
 ---
 
@@ -89,7 +89,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ## MoveIt — Motion Planning & Manipulation
 
-**Folders:** `course_moveit/robot_arm_*`, `robot_arm_moveit_config`
+**Folders:** `course_moveit/`
 
 **What I learned:**
 
@@ -115,7 +115,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ## Nav2 — SLAM & Navigation
 
-**Folders:** `course_nav2/nav2_turtlebot3_learning`, `turtlebot3_gz_sim`
+**Folders:** `course_nav2/`
 
 **What I learned:**
 
@@ -190,7 +190,7 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ## Tech Stack & Skills
 
-* **ROS 2 Jazzy**, **C++17/20**, **Python 3.12**
+* **ROS 2 Jazzy**, **C++17**, **Python 3.12**
 * **MoveIt**, **Nav2**, **Gazebo (Harmonic)**, **RViz2**
 * **URDF/Xacro**, **TF2**, **ros2_control** (in progress)
 * **Actions, Lifecycle, Components, Executors**

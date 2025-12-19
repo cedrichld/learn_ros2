@@ -16,11 +16,11 @@
   gz_type_name: "gz.msgs.Pose_V"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "/cmd_vel"
-  gz_topic_name: "/model/my_robot/cmd_vel"
-  ros_type_name: "geometry_msgs/msg/Twist"
-  gz_type_name: "gz.msgs.Twist"
-  direction: ROS_TO_GZ
+# - ros_topic_name: "/cmd_vel"
+#   gz_topic_name: "/model/my_robot/cmd_vel"
+#   ros_type_name: "geometry_msgs/msg/Twist"
+#   gz_type_name: "gz.msgs.Twist"
+#   direction: ROS_TO_GZ
 
 - ros_topic_name: "/camera/camera_info"
   gz_topic_name: "/camera/camera_info"
@@ -35,14 +35,14 @@
   direction: GZ_TO_ROS
 
 # Arm
-- ros_topic_name: "/joint0/cmd_pos"
-  gz_topic_name: "/model/my_robot/joint/arm_base_forearm_joint/0/cmd_pos"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
+# - ros_topic_name: "/joint0/cmd_pos"
+#   gz_topic_name: "/model/my_robot/joint/arm_base_forearm_joint/0/cmd_pos"
+#   ros_type_name: "std_msgs/msg/Float64"
+#   gz_type_name: "gz.msgs.Double"
+#   direction: ROS_TO_GZ
 
-- ros_topic_name: "/joint1/cmd_pos"
-  gz_topic_name: "/model/my_robot/joint/forearm_hand_joint/0/cmd_pos"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
+# - ros_topic_name: "/joint1/cmd_pos"
+#   gz_topic_name: "/model/my_robot/joint/forearm_hand_joint/0/cmd_pos"
+#   ros_type_name: "std_msgs/msg/Float64"
+#   gz_type_name: "gz.msgs.Double"
+#   direction: ROS_TO_GZ
