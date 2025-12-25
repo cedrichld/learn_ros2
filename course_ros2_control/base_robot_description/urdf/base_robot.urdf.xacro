@@ -3,6 +3,14 @@
 
     <xacro:include filename="common_properties.xacro" />
     <xacro:include filename="mobile_base.xacro" />
-    <xacro:include filename="mobile_base.ros2_control.xacro" />
+    <!-- <xacro:include filename="mobile_base.ros2_control.xacro" /> -->
+    <xacro:include filename="arm.ros2_control.xacro" />
+    <xacro:include filename="arm.xacro" />
+
+    <joint name="mobile_base_arm_base_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="arm_base_link" />
+        <origin xyz="${base_length / 4.0} 0 ${base_height}" rpy="0 0 0"/>
+    </joint>
 
 </robot>

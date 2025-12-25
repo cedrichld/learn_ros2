@@ -1,3 +1,6 @@
+// usage: 
+// ros2 run robot_arm_commander_cpp test_moveit2 --ros-args --params-file ~/ros2_ws/learn_ros2/src/course_moveit/robot_arm_commander_cpp/config/kinematics_params.yaml 
+
 #include <rclcpp/rclcpp.hpp>
 #include <moveit/move_group_interface/move_group_interface.hpp>
 #include <example_interfaces/msg/bool.hpp>

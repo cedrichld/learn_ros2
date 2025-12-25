@@ -21,6 +21,8 @@ ament_target_dependencies(test_moveit2 rclcpp moveit_ros_planning_interface)
 add_executable(commander src/commander_template.cpp)
 ament_target_dependencies(commander rclcpp moveit_ros_planning_interface example_interfaces robot_arm_interfaces)
 
+include_directories(config)
+
 install(TARGETS 
   test_moveit1
   test_moveit2

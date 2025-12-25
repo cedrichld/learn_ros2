@@ -5,4 +5,5 @@
            <description>
                 Hardware interface for a mobile base with 2 Dynamixel motors.
            </description>
+     </class>
 </library>

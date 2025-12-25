@@ -16,9 +16,9 @@ hardware_interface::CallbackReturn MobileBaseHardwareInterface::on_init
     const auto & info = params.hardware_info;
     info_ = info; // Private attribute from System Interface
 
-    left_motor_id_ = 10;
-    right_motor_id_ = 20;
-    port_ = "dev/ttyACM0";
+    left_motor_id_ = std::stoi(info_.hardware_parameters["left_motor_id"]);
+    right_motor_id_ = std::stoi(info_.hardware_parameters["right_motor_id"]);
+    port_ = info_.hardware_parameters["port"]; 
 
     driver_ = std::make_shared<XL330Driver>(port_);
 
@@ -38,6 +38,19 @@ hardware_interface::CallbackReturn MobileBaseHardwareInterface::on_configure
     if (driver_->init() != 0) {
         return hardware_interface::CallbackReturn::ERROR;
     }
+    
+    // Check logs make sense for what we control / receive state feedback from
+    for (const auto & [name, descr] : joint_command_interfaces_)
+    {
+        RCLCPP_INFO(get_logger(), "COMMAND INTERFACE NAME: ");
+        RCLCPP_INFO(get_logger(), name.c_str());
+    }
+    for (const auto & [name, descr] : joint_state_interfaces_)
+    {
+        RCLCPP_INFO(get_logger(), "STATE INTERFACE NAME: ");
+        RCLCPP_INFO(get_logger(), name.c_str());
+    }
+
     return hardware_interface::CallbackReturn::SUCCESS;
 }
 
@@ -74,6 +87,8 @@ hardware_interface::return_type MobileBaseHardwareInterface::read
     (void)time;
     double left_vel = driver_->getVelocityRadianPerSec(left_motor_id_);
     double right_vel = driver_->getVelocityRadianPerSec(right_motor_id_);
+    if (abs(left_vel)  < 0.03) { left_vel = 0.0; }
+    if (abs(right_vel) < 0.03) { left_vel = 0.0; }
     set_state("base_left_wheel_joint/velocity", left_vel); // from the system interface class
     set_state("base_right_wheel_joint/velocity", right_vel);
     set_state("base_left_wheel_joint/position", 
@@ -81,6 +96,10 @@ hardware_interface::return_type MobileBaseHardwareInterface::read
     //  ^^ could also get actual position from motor ofc
     set_state("base_right_wheel_joint/position", 
         get_state("base_right_wheel_joint/position") + right_vel * period.seconds());
+    
+    // Constantly output left/right vel/pos
+    // RCLCPP_INFO(get_logger(), "left vel: %lf, right vel: %lf, left pos: %lf, right pos: %lf",
+    //          left_vel, right_vel, get_state("base_left_wheel_joint/position"), get_state("base_right_wheel_joint/position"));
 
     return hardware_interface::return_type::OK;
 }
@@ -93,6 +112,11 @@ hardware_interface::return_type MobileBaseHardwareInterface::write
     // Send to driver a Target Velocity   | motor id #   | from ros2 cmd sent to joint #     | vel/pos)
     driver_->setTargetVelocityRadianPerSec(left_motor_id_, get_command("base_left_wheel_joint/velocity"));
     driver_->setTargetVelocityRadianPerSec(right_motor_id_, get_command("base_right_wheel_joint/velocity"));
+    
+    // Constantly output what we are commanding from ros2
+    // RCLCPP_INFO(get_logger(), "left vel: %lf, right vel: %lf", get_command("base_left_wheel_joint/velocity"), 
+    //                     get_command("base_right_wheel_joint/velocity"));
+
     return hardware_interface::return_type::OK;
 }
 
