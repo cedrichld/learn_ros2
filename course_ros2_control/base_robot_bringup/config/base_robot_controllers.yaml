@@ -11,6 +11,9 @@ controller_manager:
     arm_joints_controller:
       type: forward_command_controller/ForwardCommandController
 
+    my_arm_joints_controller:
+      type: complimentary_filter_controller/ComplimentaryFilterController
+
 diff_drive_controller:
   ros__parameters: # adding para for node we created
     left_wheel_names: ["base_left_wheel_joint"]
@@ -37,3 +40,9 @@ arm_joints_controller:
   ros__parameters:
     joints: ["arm_base_forearm_joint", "forearm_hand_joint"]
     interface_name: "position"
+
+my_arm_joints_controller:
+  ros__parameters:
+    joints: ["arm_base_forearm_joint", "forearm_hand_joint"]
+    interface_name: "position"
+    coefficient: 0.05

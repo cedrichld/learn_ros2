@@ -24,7 +24,8 @@
     <!-- No need to start the controller manager - Gazebo starts it for us -->
     <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"/>
     <node pkg="controller_manager" exec="spawner" args="diff_drive_controller"/>
-    <node pkg="controller_manager" exec="spawner" args="arm_joints_controller"/>
+    <!-- <node pkg="controller_manager" exec="spawner" args="arm_joints_controller"/> -->
+    <node pkg="controller_manager" exec="spawner" args="my_arm_joints_controller" />
 
     <node pkg="rviz2" exec="rviz2" output="screen" 
           args="-d $(var rviz_config_path)" />

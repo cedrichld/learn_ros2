@@ -1,0 +1,9 @@
+<library path="custom_robot_controllers">
+    <class name="complimentary_filter_controller/ComplimentaryFilterController"
+           type="complimentary_filter_controller::ComplimentaryFilterController"
+           base_class_type="controller_interface::ControllerInterface">
+        <description>
+            Forward joint commands witha  complementary filter
+        </description>
+    </class>
+</library>

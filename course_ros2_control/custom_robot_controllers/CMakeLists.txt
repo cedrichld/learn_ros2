@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(base_robot_hardware)
+project(custom_robot_controllers)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -9,21 +9,21 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
-find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
-find_package(dynamixel_sdk REQUIRED)
+find_package(controller_interface REQUIRED)
+find_package(example_interfaces REQUIRED)
+
 
 include_directories(include)
 
 add_library(
   ${PROJECT_NAME} SHARED
-  src/mobile_base_hardware_interface.cpp
-  src/arm_hardware_interface.cpp
+  src/complimentary_filter_controller.cpp
 )
 
-ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_interface pluginlib dynamixel_sdk)
+ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle controller_interface pluginlib example_interfaces)
 
-pluginlib_export_plugin_description_file(hardware_interface base_robot_hardware_interface.xml)
+pluginlib_export_plugin_description_file(controller_interface complimentary_filter_controller_plugin.xml)
 
 install(
   TARGETS ${PROJECT_NAME} 
@@ -40,7 +40,7 @@ ament_export_libraries(
 )
 
 ament_export_dependencies(
-  hardware_interface
+  controller_interface
   pluginlib
   rclcpp
   rclcpp_lifecycle

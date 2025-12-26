@@ -79,8 +79,8 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 ## **ros2_control** (Hardware Interfaces & Controllers)
 > Folders: `course_ros2_control/`
 
-* **Skills:** ROS 2 hardware_interface, ROS 2 controller_manager, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, C++ motor drivers
-* **Outcome:** bring a custom URDF to life with ros2_controllers and hardware_interfaces for robust integration between hardware motor drivers and ROS 2 applications. Also developed a custom ros2_control controller.
+* **Skills:** ROS 2 hardware_interface, ROS 2 controller_manager, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, C++ motor drivers, build custom ros2_control controller.
+* **Outcome:** bring a custom URDF to life with ros2_controllers and hardware_interfaces for robust integration between hardware motor drivers and ROS 2 applications. Also developed a custom ros2_control complimentary filter controller.
 
 <p align="center">
   <img src="docs/ros2_control/gz_term_ros2_control.png"  height="250px" />
