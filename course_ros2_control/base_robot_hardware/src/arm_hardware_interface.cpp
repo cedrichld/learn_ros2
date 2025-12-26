@@ -82,7 +82,7 @@ hardware_interface::CallbackReturn TwoLinkArmHardwareInterface::on_deactivate
 hardware_interface::return_type TwoLinkArmHardwareInterface::read
     (const rclcpp::Time & time, const rclcpp::Duration & period)
 {
-    (void)time;
+    (void)time, (void)period;
     double first_pose_ = driver_->getPositionRadian(first_motor_id_);
     double second_pose_ = driver_->getPositionRadian(second_motor_id_);
     set_state("arm_base_forearm_joint/position", first_pose_);

@@ -6,4 +6,11 @@
                 Hardware interface for a mobile base with 2 Dynamixel motors.
            </description>
      </class>
+     <class name="two_link_arm_hardware/TwoLinkArmHardwareInterface"
+           type="two_link_arm_hardware::TwoLinkArmHardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+           <description>
+                Hardware interface for a 2 DoF arm with 2 Dynamixel motors.
+           </description>
+     </class>
 </library>

@@ -18,17 +18,16 @@ include_directories(include)
 add_library(
   ${PROJECT_NAME}
   src/mobile_base_hardware_interface.cpp
-)
-
-add_library(
-  ${PROJECT_NAME}
   src/arm_hardware_interface.cpp
 )
+# add_library(
+#   ${PROJECT_NAME}
+#   src/arm_hardware_interface.cpp
+# )
 
 ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_interface pluginlib dynamixel_sdk)
 
 pluginlib_export_plugin_description_file(hardware_interface base_robot_hardware_interface.xml)
-pluginlib_export_plugin_description_file(hardware_interface arm_robot_hardware_interface.xml)
 
 install(
   TARGETS ${PROJECT_NAME} 
