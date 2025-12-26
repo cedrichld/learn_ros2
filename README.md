@@ -83,8 +83,8 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 * **Outcome:** bring a custom URDF to life with ros2_controllers and hardware_interfaces for robust integration between hardware motor drivers and ROS 2 applications. Also developed a custom ros2_control complimentary filter controller.
 
 <p align="center">
-  <img src="docs/ros2_control/gz_term_ros2_control.png"  height="250px" />
-  <img src="docs/ros2_control/hardware_ros2_control.png" height="250px" />
+  <img src="docs/ros2_control/gz_term_ros2_control.png"  height="180px" />
+  <img src="docs/ros2_control/hardware_ros2_control.png" height="180px" />
 </p> 
 
 ---
