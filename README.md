@@ -21,7 +21,7 @@ course_level2/       # URDF, TF, RViz2, Gazebo; sensor sim + bringup
 course_level3/       # Actions, lifecycle, components, executors + final project
 course_moveit/       # MoveIt planning (URDF->SRDF, planning groups, API demos)
 course_nav2/         # SLAM & Nav2 with TurtleBot3 in Gazebo + mapping & nav
-course_ros2_control/ # (Next up) ROS 2 Control hardware interfaces & controllers
+course_ros2_control/ # ROS 2 Control hardware interfaces & controllers
 docs/                # GIFs, videos, screenshots, certificates
 ```
 
@@ -76,14 +76,16 @@ ros2 launch nav2_turtlebot3_learning navigation2.launch.py use_sim_time:=True \
 
 ---
 
-## Next up: **ros2_control** (Hardware Interfaces & Controllers)
+## **ros2_control** (Hardware Interfaces & Controllers)
+> Folders: `course_ros2_control/`
 
-**Focus (planned):**
+* **Skills:** ROS 2 hardware_interface, ROS 2 controller_manager, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, C++ motor drivers
+* **Outcome:** bring a custom URDF to life with ros2_controllers and hardware_interfaces for robust integration between hardware motor drivers and ROS 2 applications. Also developed a custom ros2_control controller.
 
-* **Skills:** hardware_interface, controller_manager, joint state/effort/velocity interfaces, `ros2_control` YAMLs, gazebo‑ros2‑control bridge, PID tuning.
-* **Outcome:** bring a custom URDF robot to life with trajectory controllers (follow_joint_trajectory) and position/velocity controllers in simulation.
-
-> Folder: `course_ros2_control/` (In Progress)
+<p align="center">
+  <img src="docs/ros2_control/gz_term_ros2_control.png"  height="250px" />
+  <img src="docs/ros2_control/hardware_ros2_control.png" height="250px" />
+</p> 
 
 ---
 

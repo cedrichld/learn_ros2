@@ -7,8 +7,8 @@
             <param name="calculate_dynamics">true</param>
             <!-- We can only run the line below instead of controller above if we have hardware -->
             <!-- <plugin>two_link_arm_hardware/TwoLinkArmHardwareInterface</plugin> -->
-            <param name="left_motor_id">30</param>
-            <param name="right_motor_id">40</param>
+            <param name="first_motor_id">30</param>
+            <param name="second_motor_id">40</param>
             <param name="dynamixel_port">/dev/ttyACM0</param>
         </hardware>
         <joint name="arm_base_forearm_joint">
